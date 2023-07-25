@@ -1,0 +1,25 @@
+Часть 1
+>> cd C:\локальный_путь к файлу
+>> docker build -t test_container .
+>> docker run -d -p 5432:5432 --name first_container test_container
+>> docker exec -it first_container psql -U usi -d database
+database=# \l
+
+Часть 2
+>> docker exec -it first_container psql -U usi -d database
+database=# \l 
+
+Часть 3
+>> docker stop first_container
+>> docker rm first_container
+>> docker run -it -d -p 5432:5432 --name second_container -v second_container:/dir/second_container test_container
+>> docker exec -it second_container psql -U usi -d database
+database=# \l
+database=# \q
+>> docker volume ls
+>> docker stop second_container
+>> docker start second_container
+>> docker exec -it second_container psql -U usi -d database
+database=# \l
+database=# \q
+
