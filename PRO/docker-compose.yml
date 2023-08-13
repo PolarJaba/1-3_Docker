@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  app:
+    build: ./app/
+    ports:
+      - 4000:4000
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db
+    networks:
+      - project-network
+ 
+  db:
+    build: ./db/
+    ports:
+      - 5432:5432
+    networks:
+      - project-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d testdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+networks:
+  project-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 173.25.0.0/16 # Подсеть для контейнеров
