@@ -1,4 +1,4 @@
-# Создание docker-compose
+# Работа с docker-compose
 
 Приложенный [docker-compose](https://github.com/PolarJaba/1-3_Docker/blob/main/PRO/doker-compose.yml) поднимает два контейнера и создает подсеть для их связи.
 
@@ -9,3 +9,9 @@
 В результате в консоль выводится таблица:
 
 ![containers_work_done.PNG](https://github.com/PolarJaba/1-3_Docker/blob/main/PRO/containers_work_done.PNG)
+
+#### Для запуска docker-compose необходимо, находясь в папке, где расположен docker-compose.yml, ввести комманду
+```
+docker-compose up
+```
+Также следует убедится, что указанная подсеть и локальные порты не используются другими контейнерами.
